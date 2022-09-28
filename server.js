@@ -6,6 +6,8 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 // ? creating routes
+app.use(express.static("public"));
+
 app.get("/", (req, res) => {
     res.sendFile(path.resolve(__dirname) + "/index.html");
 });
