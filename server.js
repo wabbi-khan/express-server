@@ -2,21 +2,39 @@ const express = require("express");
 const path = require("path");
 const app = express();
 
+// * ejs engine
+app.set("view engine", "ejs");
+console.log(app.get("views"));
+
 // ? creating server with the help of listen
 const PORT = process.env.PORT || 4000;
 
 // ? creating routes
 app.use(express.static("public"));
 
+// * with ejs engine
 app.get("/", (req, res) => {
-    res.sendFile(path.resolve(__dirname) + "/index.html");
+    res.render("index", {
+        title: "My home page",
+    });
 });
 app.get("/about", (req, res) => {
-    res.sendFile(path.resolve(__dirname) + "/about.html");
+    res.render("about", {
+        title: "My about page",
+    });
 });
-app.get("/download", (req, res) => {
-    res.download(path.resolve(__dirname) + "/about.html");
-});
+
+// * without ejs engine
+
+// app.get("/", (req, res) => {
+//     res.sendFile(path.resolve(__dirname) + "/index.html");
+// });
+// app.get("/about", (req, res) => {
+//     res.sendFile(path.resolve(__dirname) + "/about.html");
+// });
+// app.get("/download", (req, res) => {
+//     res.download(path.resolve(__dirname) + "/about.html");
+// });
 
 app.listen(4000, () => {
     console.log(`Listening on Port ${PORT}`);
