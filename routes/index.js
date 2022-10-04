@@ -1,5 +1,8 @@
 const router = require("express").Router();
 const apiKeyMiddleWare = require("../middlewares/apiKey");
+
+// ? Applying globally
+// router.use(apiKeyMiddleWare);
 // ? Pages routes
 router.get("/", (req, res) => {
     res.render("index", {
