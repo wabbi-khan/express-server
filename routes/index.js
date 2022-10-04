@@ -1,5 +1,5 @@
 const router = require("express").Router();
-
+const apiKeyMiddleWare = require("../middlewares/apiKey");
 // ? Pages routes
 router.get("/", (req, res) => {
     res.render("index", {
@@ -14,7 +14,7 @@ router.get("/about", (req, res) => {
 });
 
 // ? MiddleWare api route
-router.get("/api/products", (req, res) => {
+router.get("/api/products", apiKeyMiddleWare, (req, res) => {
     res.json([{
             id: "1",
             name: "Chrome",
