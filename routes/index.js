@@ -17,15 +17,15 @@ router.get("/about", (req, res) => {
 });
 
 // ? MiddleWare api route
-router.get("/api/products", apiKeyMiddleWare, (req, res) => {
-    res.json([{
-            id: "1",
-            name: "Chrome",
-        },
-        {
-            id: "2",
-            name: "Apple",
-        },
-    ]);
-});
+// router.get("/api/products", apiKeyMiddleWare, (req, res) => {
+//     res.json([{
+//             id: "1",
+//             name: "Chrome",
+//         },
+//         {
+//             id: "2",
+//             name: "Apple",
+//         },
+//     ]);
+// });
 module.exports = router;
