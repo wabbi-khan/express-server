@@ -24,6 +24,6 @@ router.post("/api/products", (req, res) => {
     products.push(product);
     // console.log(req.body);
 
-    res.json({});
+    res.json(product);
 });
 module.exports = router;
