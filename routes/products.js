@@ -10,4 +10,20 @@ router.get("/products", (req, res) => {
 router.get("/api/products", (req, res) => {
     res.json(products);
 });
+router.post("/api/products", (req, res) => {
+    const { name, price } = req.body;
+    if (!name || !price) {
+        return res.status(422).json({ error: "ALL FIELDS ARE REQUIRED." });
+    }
+
+    const product = {
+        name: name,
+        price: price,
+        id: new Date().getTime().toString(),
+    };
+    products.push(product);
+    // console.log(req.body);
+
+    res.json({});
+});
 module.exports = router;
