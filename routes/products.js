@@ -1,5 +1,5 @@
 const { json } = require("express");
-const products = require("../productData");
+let products = require("../productData");
 const router = require("express").Router();
 
 router.get("/products", (req, res) => {
@@ -23,7 +23,10 @@ router.post("/api/products", (req, res) => {
     };
     products.push(product);
     // console.log(req.body);
-
     res.json(product);
+});
+router.delete("/api/products/:productId", (req, res) => {
+    products = products.filter((product) => req.params.productId !== product.id);
+    res.json({ status: "OK" });
 });
 module.exports = router;
