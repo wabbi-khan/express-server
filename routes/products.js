@@ -1,5 +1,6 @@
 const { json } = require("express");
 const ErrorHandler = require("../errors/ErrorHandler");
+const apiKeyMiddleWare = require("../middlewares/apiKey");
 let products = require("../productData");
 const router = require("express").Router();
 
@@ -11,12 +12,12 @@ router.get("/products", (req, res) => {
 router.get("/api/products", (req, res) => {
     res.json(products);
 });
-router.post("/api/products", (req, res, next) => {
-    try {
-        console.log(city);
-    } catch (err) {
-        next(ErrorHandler.serverError(err.message));
-    }
+router.post("/api/products", apiKeyMiddleWare, (req, res, next) => {
+    // try {
+    //     console.log(city);
+    // } catch (err) {
+    //     next(ErrorHandler.serverError(err.message));
+    // }
     const { name, price } = req.body;
     if (!name || !price) {
         next(ErrorHandler.validationError());

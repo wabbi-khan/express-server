@@ -1,3 +1,5 @@
+const ErrorHandler = require("../errors/ErrorHandler");
+
 function apiKey(req, res, next) {
     const api_key = "1234567";
     console.log(req.query.api_key);
@@ -5,7 +7,9 @@ function apiKey(req, res, next) {
     if (userApiKey && userApiKey === api_key) {
         next();
     } else {
-        res.json({ Message: "Not Allowed !" });
+        next(ErrorHandler.forbidden());
+
+        // res.json({ Message: "Not Allowed !" });
     }
 }
 module.exports = apiKey;
