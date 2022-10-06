@@ -13,7 +13,8 @@ router.get("/api/products", (req, res) => {
 router.post("/api/products", (req, res) => {
     const { name, price } = req.body;
     if (!name || !price) {
-        return res.status(422).json({ error: "ALL FIELDS ARE REQUIRED." });
+        throw new Error("ALL FIELDS ARE REQUIRED.");
+        // return res.status(422).json({ error: "ALL FIELDS ARE REQUIRED." });
     }
 
     const product = {

@@ -21,6 +21,11 @@ app.use((req, res, next) => {
     return res.json({ message: "pahe not found" });
 });
 
+app.use((err, req, res, next) => {
+    console.log("Error", err.message);
+    next();
+});
+
 // * with ejs engine
 // app.get("/", (req, res) => {
 //     res.render("index", {
