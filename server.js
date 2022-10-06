@@ -16,6 +16,11 @@ app.use(express.json());
 app.use(productRouter);
 app.use(mainRouter);
 
+// ? Error Handling
+app.use((req, res, next) => {
+    return res.json({ message: "pahe not found" });
+});
+
 // * with ejs engine
 // app.get("/", (req, res) => {
 //     res.render("index", {
