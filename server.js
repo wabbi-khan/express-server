@@ -3,6 +3,8 @@ const path = require("path");
 const app = express();
 const mainRouter = require("./routes/index");
 const productRouter = require("./routes/products");
+const ErrorHandler = require("./errors/ErrorHandler");
+
 // * ejs engine
 app.set("view engine", "ejs");
 console.log(app.get("views"));
@@ -22,9 +24,23 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-    console.log("Error", err.message);
-    res.json({ message: "All fields are required" });
+    if (err instanceof ErrorHandler) {
+        res.status(err.status).json({
+            error: {
+                message: err.message,
+                status: err.status,
+            },
+        });
+    } else {
+        res.status(500).json({
+            error: {
+                message: err.message,
+                status: err.status,
+            },
+        });
+    }
     next();
+    // console.log("Error", err.message);
 });
 
 // * with ejs engine

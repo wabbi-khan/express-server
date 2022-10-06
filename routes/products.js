@@ -12,9 +12,14 @@ router.get("/api/products", (req, res) => {
     res.json(products);
 });
 router.post("/api/products", (req, res, next) => {
+    try {
+        console.log(city);
+    } catch (err) {
+        next(ErrorHandler.serverError(err.message));
+    }
     const { name, price } = req.body;
     if (!name || !price) {
-        next(ErrorHandler.notFoundError());
+        next(ErrorHandler.validationError());
         // throw new Error("ALL FIELDS ARE REQUIRED.");
         // return res.status(422).json({ error: "ALL FIELDS ARE REQUIRED." });
     }
