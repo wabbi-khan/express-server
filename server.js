@@ -23,6 +23,7 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
     console.log("Error", err.message);
+    res.json({ message: "All fields are required" });
     next();
 });
 
